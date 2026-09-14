@@ -1,12 +1,16 @@
 import re
 
 
-HIGH_RISK_TERMS = {
-    "国家级": "The claim uses a national-level superlative.",
-    "最高级": "The claim uses a highest-level superlative.",
-    "最佳": "The claim uses a best-ranking superlative.",
-}
-
+HIGH_RISK_PATTERNS = [
+    (
+        r"(彻底治愈|治愈|根治|包治)",
+        "The claim makes a medical or cure-related promise.",
+    ),
+    (
+        r"(国家级|最高级|最佳)",
+        "The claim uses a prohibited or high-risk superlative.",
+    ),
+]
 
 EVIDENCE_PATTERNS = [
     (
@@ -24,9 +28,25 @@ EVIDENCE_PATTERNS = [
 ]
 
 
-def assess_by_rules(claim: str) -> dict:
-    """Return a simple rule-based assessment for one Chinese claim."""
+def find_matches(claim: str, patterns: list[tuple[str, str]]) -> list[dict]:
+    """Return all unique text spans matched by the configured patterns."""
+    matches = []
 
+    for pattern, reason in patterns:
+        for match in re.finditer(pattern, claim):
+            item = {
+                "text": match.group(0),
+                "reason": reason,
+            }
+
+            if item not in matches:
+                matches.append(item)
+
+    return matches
+
+
+def assess_by_rules(claim: str) -> dict:
+    """Return a rule-based assessment for one Chinese claim."""
     cleaned_claim = claim.strip()
 
     if not cleaned_claim:
@@ -38,37 +58,45 @@ def assess_by_rules(claim: str) -> dict:
             "method": "rules_baseline",
         }
 
-    high_risk_matches = [
-        term for term in HIGH_RISK_TERMS if term in cleaned_claim
-    ]
+    high_risk_matches = find_matches(
+        cleaned_claim,
+        HIGH_RISK_PATTERNS,
+    )
+
+    evidence_matches = find_matches(
+        cleaned_claim,
+        EVIDENCE_PATTERNS,
+    )
+
+    all_matches = high_risk_matches + evidence_matches
+    matched_terms = list(
+        dict.fromkeys(item["text"] for item in all_matches)
+    )
 
     if high_risk_matches:
+        reasons = list(
+            dict.fromkeys(item["reason"] for item in all_matches)
+        )
+
         return {
             "risk_level": "high_risk",
-            "matched_terms": high_risk_matches,
-            "reason": HIGH_RISK_TERMS[high_risk_matches[0]],
+            "matched_terms": matched_terms,
+            "reason": " ".join(reasons),
             "next_action": (
-                "Remove or revise the highlighted superlative "
-                "and obtain human review."
+                "Do not publish the claim without revision and human review."
             ),
             "method": "rules_baseline",
         }
 
-    evidence_matches = []
-
-    for pattern, reason in EVIDENCE_PATTERNS:
-        if re.search(pattern, cleaned_claim):
-            evidence_matches.append((pattern, reason))
-
     if evidence_matches:
+        reasons = list(
+            dict.fromkeys(item["reason"] for item in evidence_matches)
+        )
+
         return {
             "risk_level": "evidence_needed",
-            "matched_terms": [
-                match.group(0)
-                for pattern, _ in evidence_matches
-                if (match := re.search(pattern, cleaned_claim))
-            ],
-            "reason": evidence_matches[0][1],
+            "matched_terms": matched_terms,
+            "reason": " ".join(reasons),
             "next_action": (
                 "Verify the claim using reliable business records "
                 "before publication."
