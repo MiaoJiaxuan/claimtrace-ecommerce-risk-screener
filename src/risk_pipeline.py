@@ -1,3 +1,4 @@
+from src.llm_client import OpenRouterClient
 from src.retrieval import CaseRetriever
 
 
@@ -5,7 +6,7 @@ PROVISIONAL_THRESHOLD = 0.30
 
 
 class ClaimTracePipeline:
-    """Run the retrieval stage of the ClaimTrace prototype."""
+    """Run retrieval, abstention and one LLM assessment."""
 
     def __init__(
         self,
@@ -19,7 +20,7 @@ class ClaimTracePipeline:
         claim: str,
         top_k: int = 3,
     ) -> dict:
-        """Retrieve cases and decide whether the evidence is sufficient."""
+        """Retrieve cases and check whether evidence is sufficient."""
         cases = self.retriever.retrieve(claim, top_k=top_k)
 
         if not cases:
@@ -29,23 +30,10 @@ class ClaimTracePipeline:
                 "threshold": self.threshold,
                 "evidence_sufficient": False,
                 "abstain": True,
-                "message": (
-                    "No evidence was retrieved. Human review is required."
-                ),
             }
 
         top_score = cases[0]["similarity_score"]
         evidence_sufficient = top_score >= self.threshold
-
-        if evidence_sufficient:
-            message = (
-                "Relevant evidence was found in the fixed case corpus."
-            )
-        else:
-            message = (
-                "The retrieved evidence is too weak. "
-                "Human review is required."
-            )
 
         return {
             "retrieved_cases": cases,
@@ -53,5 +41,51 @@ class ClaimTracePipeline:
             "threshold": self.threshold,
             "evidence_sufficient": evidence_sufficient,
             "abstain": not evidence_sufficient,
-            "message": message,
+        }
+
+    def assess(
+        self,
+        claim: str,
+        top_k: int = 3,
+    ) -> dict:
+        """Assess one claim and call the LLM at most once."""
+        retrieval_result = self.retrieve_evidence(
+            claim,
+            top_k=top_k,
+        )
+
+        if retrieval_result["abstain"]:
+            return {
+                "llm_called": False,
+                "retrieval": retrieval_result,
+                "risk_card": {
+                    "risk_level": "insufficient_evidence",
+                    "highlighted_claim": "",
+                    "reason": (
+                        "The retrieved evidence is below the provisional "
+                        "similarity threshold."
+                    ),
+                    "source_title": None,
+                    "source_url": None,
+                    "next_action": (
+                        "Send the claim for human review before publication."
+                    ),
+                    "confidence": 0.0,
+                    "abstain": True,
+                },
+                "model": None,
+                "usage": {},
+            }
+
+        llm_result = OpenRouterClient().assess(
+            claim,
+            retrieval_result["retrieved_cases"],
+        )
+
+        return {
+            "llm_called": True,
+            "retrieval": retrieval_result,
+            "risk_card": llm_result["risk_card"],
+            "model": llm_result["model"],
+            "usage": llm_result["usage"],
         }

@@ -11,10 +11,22 @@ st.set_page_config(
 )
 
 
-@st.cache_resource(show_spinner="Loading the multilingual retrieval model...")
+@st.cache_resource(show_spinner="Loading the retrieval model...")
 def load_pipeline() -> ClaimTracePipeline:
     """Load the retrieval model once and reuse it."""
     return ClaimTracePipeline()
+
+
+def show_risk_level(risk_level: str) -> None:
+    """Display one risk level using a suitable Streamlit message."""
+    if risk_level == "high_risk":
+        st.error("High risk")
+    elif risk_level == "evidence_needed":
+        st.warning("Evidence needed")
+    elif risk_level == "low_risk":
+        st.success("No configured concern identified")
+    else:
+        st.info("Insufficient evidence")
 
 
 st.title("ClaimTrace")
@@ -37,68 +49,134 @@ claim = st.text_area(
 if st.button("Assess claim", type="primary"):
     if not claim.strip():
         st.warning("Please enter a Chinese product claim.")
+        st.stop()
+
+    baseline_result = assess_by_rules(claim)
+
+    st.subheader("1. Rule-based baseline")
+    show_risk_level(baseline_result["risk_level"])
+
+    st.write("**Matched text:**")
+
+    if baseline_result["matched_terms"]:
+        st.write(", ".join(baseline_result["matched_terms"]))
     else:
-        baseline_result = assess_by_rules(claim)
+        st.write("None")
 
-        st.subheader("1. Rule-based baseline")
+    st.write("**Reason:**")
+    st.write(baseline_result["reason"])
 
-        risk_level = baseline_result["risk_level"]
-
-        if risk_level == "high_risk":
-            st.error("High risk")
-        elif risk_level == "evidence_needed":
-            st.warning("Evidence needed")
-        elif risk_level == "low_risk":
-            st.success("No configured rule was triggered")
-        else:
-            st.info("Insufficient evidence")
-
-        st.write("**Matched text:**")
-
-        if baseline_result["matched_terms"]:
-            st.write(", ".join(baseline_result["matched_terms"]))
-        else:
-            st.write("None")
-
-        st.write("**Reason:**")
-        st.write(baseline_result["reason"])
-
-        st.divider()
-        st.subheader("2. Retrieved evidence")
-
-        with st.spinner("Searching the fixed official-case corpus..."):
+    try:
+        with st.spinner(
+            "Retrieving evidence and preparing the assessment..."
+        ):
             pipeline = load_pipeline()
-            retrieval_result = pipeline.retrieve_evidence(claim)
+            final_result = pipeline.assess(claim)
+    except Exception as error:
+        st.divider()
+        st.subheader("System status")
+        st.error(
+            "The assessment could not be completed. "
+            "Human review is required."
+        )
+        st.caption(f"Error type: {type(error).__name__}")
+        st.stop()
 
-        if retrieval_result["abstain"]:
-            st.warning("Insufficient evidence — human review required.")
-        else:
-            st.success("Relevant evidence found.")
+    retrieval_result = final_result["retrieval"]
 
-        st.write(
-            f"Top similarity score: "
-            f"{retrieval_result['top_score']:.4f}"
+    st.divider()
+    st.subheader("2. Retrieved evidence")
+
+    if retrieval_result["abstain"]:
+        st.warning("Insufficient evidence — human review required.")
+    else:
+        st.success("Relevant evidence found.")
+
+    st.write(
+        f"Top similarity score: "
+        f"{retrieval_result['top_score']:.4f}"
+    )
+
+    st.caption(
+        f"Provisional threshold: "
+        f"{retrieval_result['threshold']:.2f}. "
+        "This threshold will be calibrated using the development set."
+    )
+
+    for case in retrieval_result["retrieved_cases"]:
+        heading = (
+            f"{case['case_id']} — {case['title']} "
+            f"(score: {case['similarity_score']:.4f})"
         )
 
-        st.caption(
-            "The current threshold of 0.30 is provisional and will be "
-            "calibrated using the development set."
-        )
-
-        for case in retrieval_result["retrieved_cases"]:
-            heading = (
-                f"{case['case_id']} — {case['title']} "
-                f"(score: {case['similarity_score']:.4f})"
+        with st.expander(heading):
+            st.write(case["case_text"])
+            st.write(f"Risk type: `{case['risk_type']}`")
+            st.markdown(
+                f"[Open the official source]({case['source_url']})"
             )
 
-            with st.expander(heading):
-                st.write(case["case_text"])
-                st.write(f"Risk type: `{case['risk_type']}`")
-                st.markdown(
-                    f"[Open the official source]({case['source_url']})"
-                )
+    st.divider()
+    st.subheader("3. Structured risk card")
 
-        st.caption(
-            "Current stage: rules and retrieval only. "
-            "The LLM assessment has not been connected yet."
+    risk_card = final_result["risk_card"]
+    show_risk_level(risk_card["risk_level"])
+
+    if not final_result["llm_called"]:
+        st.warning(
+            "The LLM was not called because the retrieved evidence "
+            "was below the threshold."
         )
+
+    st.write("**Highlighted claim:**")
+    st.write(risk_card["highlighted_claim"] or "None")
+
+    st.write("**Reason:**")
+    st.write(risk_card["reason"])
+
+    st.write("**Next action:**")
+    st.write(risk_card["next_action"])
+
+    st.write("**Confidence:**")
+    st.write(f"{risk_card['confidence']:.2f}")
+
+    st.write("**Abstained:**")
+    st.write("Yes" if risk_card["abstain"] else "No")
+
+    if risk_card["source_title"]:
+        st.write("**Supporting source:**")
+        st.write(risk_card["source_title"])
+
+    if risk_card["source_url"]:
+        st.markdown(
+            f"[Open the cited official source]"
+            f"({risk_card['source_url']})"
+        )
+
+    if final_result["llm_called"]:
+        usage = final_result["usage"]
+
+        st.divider()
+        st.subheader("4. Model usage")
+
+        st.write(f"Model: `{final_result['model']}`")
+        st.write(
+            f"Prompt tokens: "
+            f"{usage.get('prompt_tokens', 'Not reported')}"
+        )
+        st.write(
+            f"Completion tokens: "
+            f"{usage.get('completion_tokens', 'Not reported')}"
+        )
+        st.write(
+            f"Total tokens: "
+            f"{usage.get('total_tokens', 'Not reported')}"
+        )
+        st.write(
+            f"Reported cost: "
+            f"${usage.get('cost', 'Not reported')}"
+        )
+
+    st.caption(
+        "A human remains responsible for the final publication decision."
+    )
