@@ -1,2 +1,4 @@
 example_id,claim_zh,claim_en,expected_behavior,notes
 EXAMPLE001,"这张手机流量卡每月只需9元，就能享受超大流量。","This mobile data card offers a large data allowance for only RMB 9 per month.",evidence_needed,"Case-derived demonstration input linked to CASE001."
+EXAMPLE002,"这套水乳可以彻底治愈皮肤红肿、瘙痒和痘痘。","This skincare set can completely cure skin redness, itching and acne.",high_risk,"Case-derived demonstration input linked to CASE002."
+EXAMPLE003,"这款普通食品可以治愈腰间盘突出、关节疼和便秘。","This ordinary food product can cure lumbar disc problems, joint pain and constipation.",high_risk,"Case-derived demonstration input linked to CASE003."

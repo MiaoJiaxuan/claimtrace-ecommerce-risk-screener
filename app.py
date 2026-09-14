@@ -1,5 +1,6 @@
 import streamlit as st
 
+from src.risk_pipeline import ClaimTracePipeline
 from src.rules_baseline import assess_by_rules
 
 
@@ -8,6 +9,13 @@ st.set_page_config(
     page_icon="🔎",
     layout="centered",
 )
+
+
+@st.cache_resource(show_spinner="Loading the multilingual retrieval model...")
+def load_pipeline() -> ClaimTracePipeline:
+    """Load the retrieval model once and reuse it."""
+    return ClaimTracePipeline()
+
 
 st.title("ClaimTrace")
 
@@ -30,11 +38,11 @@ if st.button("Assess claim", type="primary"):
     if not claim.strip():
         st.warning("Please enter a Chinese product claim.")
     else:
-        result = assess_by_rules(claim)
+        baseline_result = assess_by_rules(claim)
 
-        st.subheader("Rule-based baseline result")
+        st.subheader("1. Rule-based baseline")
 
-        risk_level = result["risk_level"]
+        risk_level = baseline_result["risk_level"]
 
         if risk_level == "high_risk":
             st.error("High risk")
@@ -45,22 +53,52 @@ if st.button("Assess claim", type="primary"):
         else:
             st.info("Insufficient evidence")
 
-        st.write("**Submitted claim:**")
-        st.code(claim)
-
         st.write("**Matched text:**")
-        if result["matched_terms"]:
-            st.write(", ".join(result["matched_terms"]))
+
+        if baseline_result["matched_terms"]:
+            st.write(", ".join(baseline_result["matched_terms"]))
         else:
             st.write("None")
 
         st.write("**Reason:**")
-        st.write(result["reason"])
+        st.write(baseline_result["reason"])
 
-        st.write("**Next action:**")
-        st.write(result["next_action"])
+        st.divider()
+        st.subheader("2. Retrieved evidence")
+
+        with st.spinner("Searching the fixed official-case corpus..."):
+            pipeline = load_pipeline()
+            retrieval_result = pipeline.retrieve_evidence(claim)
+
+        if retrieval_result["abstain"]:
+            st.warning("Insufficient evidence — human review required.")
+        else:
+            st.success("Relevant evidence found.")
+
+        st.write(
+            f"Top similarity score: "
+            f"{retrieval_result['top_score']:.4f}"
+        )
 
         st.caption(
-            "Method: rules baseline. This result is not a final legal "
-            "or platform-compliance decision."
+            "The current threshold of 0.30 is provisional and will be "
+            "calibrated using the development set."
+        )
+
+        for case in retrieval_result["retrieved_cases"]:
+            heading = (
+                f"{case['case_id']} — {case['title']} "
+                f"(score: {case['similarity_score']:.4f})"
+            )
+
+            with st.expander(heading):
+                st.write(case["case_text"])
+                st.write(f"Risk type: `{case['risk_type']}`")
+                st.markdown(
+                    f"[Open the official source]({case['source_url']})"
+                )
+
+        st.caption(
+            "Current stage: rules and retrieval only. "
+            "The LLM assessment has not been connected yet."
         )

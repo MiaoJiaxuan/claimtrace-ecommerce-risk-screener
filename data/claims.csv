@@ -1,2 +1,4 @@
 claim_id,claim_zh,claim_en,label,source_type,related_case_id,split,label_reason
 CLAIM001,"这张手机流量卡每月只需9元，就能享受超大流量。","This mobile data card offers a large data allowance for only RMB 9 per month.",evidence_needed,case_derived,CASE001,development,"The price and data allowance require verifiable supporting evidence."
+CLAIM002,"这套水乳可以彻底治愈皮肤红肿、瘙痒和痘痘。","This skincare set can completely cure skin redness, itching and acne.",high_risk,case_derived,CASE002,development,"A cosmetic product makes an explicit cure-related claim."
+CLAIM003,"这款普通食品可以治愈腰间盘突出、关节疼和便秘。","This ordinary food product can cure lumbar disc problems, joint pain and constipation.",high_risk,case_derived,CASE003,development,"An ordinary food product claims that it can cure medical conditions."

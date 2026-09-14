@@ -1,2 +1,4 @@
 case_id,publisher,publish_date,title,case_text,risk_type,source_url
 CASE001,市场监管总局,2025-07-09,"北京市昌平区市场监管局查处中智无线（北京）科技有限公司发布违法广告案","中智无线（北京）科技有限公司在互联网发布手机流量卡广告，宣称“超大流量 9元/月”，与实际情况不符。",false_price_claim,https://www.samr.gov.cn/xw/zj/art/2025/art_1212b0d62d0844d58c635269e40efe35.html
+CASE002,市场监管总局,2025-07-09,"浙江省杭州市拱墅区市场监管局查处杭州迅犹贸易有限公司违法广告案","当事人在直播电商活动中宣传一款化妆品能够治疗皮肤红肿、瘙痒、刺痛和痘痘等症状，容易使消费者将化妆品与药品混淆。",cosmetic_treatment_claim,https://www.samr.gov.cn/xw/zj/art/2025/art_1212b0d62d0844d58c635269e40efe35.html
+CASE003,市场监管总局,2025-07-09,"广东省广州市白云区市场监管局查处广州岐黄医道文化传媒有限公司违法广告案","当事人推广普通食品时，宣称产品能够治疗腰间盘突出、关节疼和便秘等问题，容易使消费者将普通食品与药品混淆。",food_treatment_claim,https://www.samr.gov.cn/xw/zj/art/2025/art_1212b0d62d0844d58c635269e40efe35.html
