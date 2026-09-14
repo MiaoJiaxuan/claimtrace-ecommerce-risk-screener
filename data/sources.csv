@@ -19,3 +19,13 @@ CASE017,市场监管总局,2024-08-16,远鉴恒辉北京国际医学研究有限
 CASE018,市场监管总局,2024-08-16,潍坊华宏药品有限公司违法广告案,普通茶饮广告使用肺部结节、咽炎和咽喉肿痛等容易与药品或医疗器械混淆的用语。,medical_language_for_food,https://www.samr.gov.cn/xw/zj/art/2024/art_040ee3ac2e924c1e9735c6f47fb734d9.html
 CASE019,市场监管总局,2024-08-16,上海高意匠健康科技有限公司违法广告案,普通瓶装饮用水广告宣称持续抗氧化、强力抗氧和抵御自由基等保健功能。,unsupported_health_function,https://www.samr.gov.cn/xw/zj/art/2024/art_040ee3ac2e924c1e9735c6f47fb734d9.html
 CASE020,上海市市场监管局,2024-09-16,上海闪嘻嘻商贸有限公司发布违法食品广告案,普通固体饮料广告宣称能够解决鼻炎、过敏、哮喘、肺部结节和便秘等问题并提升免疫力。,food_disease_claim,https://www.samr.gov.cn/ggjgs/sjdt/gzdt/art/2024/art_ed921b8ca9084dbc9d7cc28e7c8818b1.html
+CASE021,北京市市场监督管理局,2024-08-12,"北京擎天数康科技有限公司发布违法广告案","当事人通过自有小程序销售普通固体饮料，并宣称产品可以改善肠胃功能、提高免疫力、预防和治疗腹泻及过敏。",food_disease_and_health_claim,https://scjgj.beijing.gov.cn/zwxx/scjgdt/202408/t20240812_3772709.html
+CASE022,北京市市场监督管理局,2024-08-12,"北京美也科技有限公司发布违法广告案","当事人通过网络店铺销售普通饮品，并发布美白淡斑、提亮嫩弹和抑制黑色素等未经证实的功效宣传。",unsupported_beauty_claim,https://scjgj.beijing.gov.cn/zwxx/scjgdt/202408/t20240812_3772709.html
+CASE023,北京市市场监督管理局,2024-08-12,"北京荡荡商贸有限公司发布违法广告案","当事人在网络店铺宣传糙米产品富含膳食纤维，但产品实际含量未达到相关食品标准规定的富含声称条件。",false_nutrition_claim,https://scjgj.beijing.gov.cn/zwxx/scjgdt/202408/t20240812_3772709.html
+CASE024,北京市市场监督管理局,2024-10-29,"北京诺狮网络有限公司普通食品广告违法案","当事人通过微信公众号宣传多种普通食品具有提高免疫力、护肝、缓解症状和延缓衰老等保健功能，并使用无法证实的用户评价。",ordinary_food_health_and_testimonial_claim,https://scjgj.beijing.gov.cn/zwxx/scjgdt/202410/t20241029_3930563.html
+CASE025,汕尾市市场监督管理局,2024-08-22,"汕尾市城区某商贸行互联网食品广告案","当事人在淘宝店铺销售普通压片糖果，并宣称产品可以改善焦虑情绪、缓解压力、增强记忆和改善睡眠。",unsupported_cognitive_health_claim,https://www.shanwei.gov.cn/swscjdglj/zwgk/0800/dxal/content/post_1074414.html
+CASE026,汕尾市市场监督管理局,2024-08-22,"汕尾红海湾经济开发区某贸易商行互联网食品广告案","当事人在拼多多店铺销售普通牛脾肽饮品，并宣称产品具有滋养脾胃、调节免疫和恢复免疫等保健功能。",ordinary_food_health_claim,https://www.shanwei.gov.cn/swscjdglj/zwgk/0800/dxal/content/post_1074414.html
+CASE027,十堰市市场监督管理局,2024-01-05,"湖北某有限公司发布违法食品广告案","当事人通过微信公众号宣传鹿茸血和鹿茸食品可以降血压、祛风湿、增强免疫力，并用于多种疾病和身体症状。",food_disease_claim,https://www.samr.gov.cn/ggjgs/sjdt/gzdt/art/2024/art_93bcd60c81fb4145b6698014ba162cbb.html
+CASE028,十堰市市场监督管理局,2024-01-05,"房县某电子商务有限公司发布虚假化妆品广告案","当事人在电商平台销售作为普通化妆品备案的洗手液，却宣传产品具有美白功效。",unsupported_cosmetic_function,https://www.samr.gov.cn/ggjgs/sjdt/gzdt/art/2024/art_93bcd60c81fb4145b6698014ba162cbb.html
+CASE029,中山市市场监督管理局,2024-10-31,"中山某厨具科技有限公司发布虚假广告案","当事人宣传厨具采用航空级材料和医用手术刀标准钢材，并发布无法证实的年度节油和节电数据。",false_material_and_performance_claim,https://www.zs.gov.cn/zszjj/gkmlpt/content/2/2457/post_2457902.html
+CASE030,中山市市场监督管理局,2024-10-31,"中山市某供应链管理有限责任公司发布违法广告案","当事人在抖音网店宣传洗面奶具有舒缓成分、面霜具有滋养功效，但相关功效未包含在产品备案信息中。",unsupported_cosmetic_claim,https://www.zs.gov.cn/zszjj/gkmlpt/content/2/2457/post_2457902.html
