@@ -1,0 +1,2 @@
+example_id,claim_zh,claim_en,expected_behavior,notes
+EXAMPLE001,"这张手机流量卡每月只需9元，就能享受超大流量。","This mobile data card offers a large data allowance for only RMB 9 per month.",evidence_needed,"Case-derived demonstration input linked to CASE001."
