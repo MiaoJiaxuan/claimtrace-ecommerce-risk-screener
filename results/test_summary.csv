@@ -1,0 +1,4 @@
+﻿group,total,classified,abstained,matched_classified,match_rate_classified_pct,coverage_pct
+case_derived,15,14,1,7,50.0,93.3
+synthetic,15,6,9,6,100.0,40.0
+all,30,20,10,13,65.0,66.7

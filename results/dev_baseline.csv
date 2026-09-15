@@ -1,0 +1,61 @@
+﻿claim_id,claim_zh,expected_label,source_type,predicted_label,matched_terms,reason
+CLAIM001,这张手机流量卡每月只需9元，就能享受超大流量。,evidence_needed,case_derived,evidence_needed,9元,The price claim requires verification against the actual offer.
+CLAIM002,这套水乳可以彻底治愈皮肤红肿、瘙痒和痘痘。,high_risk,case_derived,high_risk,彻底治愈,The claim makes a medical or cure-related promise.
+CLAIM003,这款普通食品可以治愈腰间盘突出、关节疼和便秘。,high_risk,case_derived,high_risk,治愈,The claim makes a medical or cure-related promise.
+CLAIM004,吃两盒这款果冻就能瘦20斤。,evidence_needed,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM005,使用这款美容仪不会反弹，每分钟相当于做十几万次卷腹。,evidence_needed,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM006,这款普通药膏可以治愈湿寒和经络不通。,high_risk,case_derived,high_risk,治愈,The claim makes a medical or cure-related promise.
+CLAIM007,这款咖啡固体饮料可以快速燃烧脂肪并改善身体机能。,evidence_needed,case_derived,evidence_needed,改善,The product-effect claim requires supporting evidence.
+CLAIM008,这款酵母调制乳粉能够增强免疫力并改善身体状况。,evidence_needed,case_derived,evidence_needed,改善,The product-effect claim requires supporting evidence.
+CLAIM009,这串项链使用全天然珍珠，并配有权威鉴定证书。,evidence_needed,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM010,直播间出售的每块和田玉都是从展示的矿场现场挖出的。,evidence_needed,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM011,这款普通食品具有保健食品功效，可以长期调理身体。,evidence_needed,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM012,蜂王浆具有九大药理作用，真实用户都证实效果显著。,high_risk,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM013,这是全球最安全、最科学、最彻底的祛斑技术。,high_risk,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM014,这款骆驼奶粉可以降低血糖并调理三高。,high_risk,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM015,知名网红亲自推荐这款保健食品，效果值得信赖。,high_risk,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM016,这款固体饮料能够护肝解毒并调节三高。,high_risk,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM017,这款食品能够清除肾结石、溶解血栓并预防老年痴呆。,high_risk,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM018,这款茶饮可以消除肺部结节并治好咽炎。,high_risk,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM019,这款瓶装水可以持续抗氧化并帮助身体抵御自由基。,evidence_needed,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM020,这款固体饮料可以改善鼻炎、哮喘和肺部结节，并提升免疫力。,high_risk,case_derived,evidence_needed,改善；提升,The product-effect claim requires supporting evidence.
+CLAIM021,这款益生菌固体饮料可以提高免疫力，并预防和治疗腹泻及过敏。,high_risk,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM022,这款白番茄烟酰胺饮品能够美白淡斑并抑制黑色素。,evidence_needed,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM023,这款七色糙米富含膳食纤维。,evidence_needed,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM024,这款即食燕窝可以提高免疫力、护肝并延缓衰老。,high_risk,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM025,每天食用这款压片糖果可以缓解焦虑、增强记忆并改善睡眠。,high_risk,case_derived,evidence_needed,改善,The product-effect claim requires supporting evidence.
+CLAIM026,这款牛脾肽饮品可以滋养脾胃并恢复免疫功能。,evidence_needed,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM027,鹿茸血食品可以降血压、祛风湿并增强免疫力。,high_risk,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM028,这款洗手液具有美白功效，可以让双手明显变白。,evidence_needed,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM029,这款五层钢锅采用航空级材料，每年可以节油72斤并节省365度电。,evidence_needed,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM030,这款氨基酸洗面奶含有经过备案的舒缓成分。,evidence_needed,case_derived,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM046,这款杯子有蓝色和白色两种颜色。,low_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM047,这款收纳盒带有可拆卸隔板。,low_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM048,这款毛巾有三种尺寸可选。,low_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM049,这款文具盒有拉链和侧边提手。,low_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM050,本店手机壳销量全平台第一。,evidence_needed,synthetic,evidence_needed,销量全平台第一,The sales or ranking claim requires verifiable supporting evidence.
+CLAIM051,这款充电宝的续航比同类产品提高50%。,evidence_needed,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM052,实验证明这款炒锅比普通炒锅节油30%。,evidence_needed,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM053,每天吃两颗这款普通软糖，就能彻底治愈失眠。,high_risk,synthetic,high_risk,彻底治愈,The claim makes a medical or cure-related promise.
+CLAIM054,这款面膜可以治疗湿疹并完全消除皮肤炎症。,high_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM055,这款普通早餐麦片可以预防糖尿病。,high_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM056,这款背包有一个主袋和两个侧袋。,low_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM057,这款餐盘提供圆形和方形两种款式。,low_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM058,这款手机支架可以折叠收起。,low_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM059,这款钥匙扣附带一个金属挂环。,low_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM060,这款耳机的电池续航达到连续播放48小时。,evidence_needed,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM061,我们的清洁剂比普通产品去污能力强三倍。,evidence_needed,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM062,这款保温杯获得了全国用户满意度第一名。,evidence_needed,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM063,这款普通果汁可以治疗胃炎。,high_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM064,这款牙膏能彻底修复龋齿，不必再去看牙医。,high_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM065,使用这款普通护肤霜三天就能治好皮炎。,high_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM066,这款靠垫有灰色和绿色两种款式。,low_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM067,这款水壶附带一个可拆卸杯盖。,low_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM068,这款桌面收纳架有三层置物空间。,low_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM069,这款帆布袋可选择短提手或长提手。,low_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM070,这款运动鞋的耐磨寿命是普通运动鞋的两倍。,evidence_needed,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM071,这款充电线获得了99%消费者好评。,evidence_needed,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM072,这款宠物食盆使用纯钛材质。,evidence_needed,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM073,这款普通香薰精油能够根治抑郁症。,high_risk,synthetic,high_risk,根治,The claim makes a medical or cure-related promise.
+CLAIM074,这款面霜对所有人都绝对安全，使用后永远不会过敏。,high_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.
+CLAIM075,这款普通花草茶能够预防癌症。,high_risk,synthetic,low_risk,,No configured rule was triggered within the limited project scope.

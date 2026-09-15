@@ -1,0 +1,6 @@
+﻿claim_id,claim_zh,expected_label,predicted_label,top_score,llm_called
+CLAIM001,这张手机流量卡每月只需9元，就能享受超大流量。,evidence_needed,high_risk,0.5616,True
+CLAIM002,这套水乳可以彻底治愈皮肤红肿、瘙痒和痘痘。,high_risk,high_risk,0.3754,True
+CLAIM046,这款杯子有蓝色和白色两种颜色。,low_risk,low_risk,0.3182,True
+CLAIM064,这款牙膏能彻底修复龋齿，不必再去看牙医。,high_risk,insufficient_evidence,0.1816,False
+CLAIM071,这款充电线获得了99%消费者好评。,evidence_needed,insufficient_evidence,0.2909,False

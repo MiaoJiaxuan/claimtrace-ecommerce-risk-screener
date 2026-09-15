@@ -59,10 +59,16 @@ next_action, confidence, abstain.
 Allowed risk levels:
 high_risk, evidence_needed, low_risk, insufficient_evidence.
 
-Use high_risk for a strong cure promise, prohibited superlative or a claim
-that closely matches a serious confirmed enforcement pattern.
+Use high_risk for a strong cure promise or a clearly prohibited expression.
 
-Use evidence_needed when the claim requires reliable supporting records.
+A retrieved enforcement case proves what happened in that specific case.
+Similar wording alone does not prove the submitted product or seller made
+the same false claim. Do not transfer factual findings from one seller to
+another.
+
+Use evidence_needed for price, quantity, ranking, rating, or performance
+claims that require reliable supporting records, unless the supplied
+evidence establishes that this is the same product and seller.
 
 Use low_risk only when no configured concern is identified. Clearly state
 that this is not legal approval.
