@@ -221,3 +221,6 @@ __marimo__/
 __pycache__/
 *.pyc
 .pytest_cache/
+
+# Local privacy-minimised request metrics
+logs/*.jsonl

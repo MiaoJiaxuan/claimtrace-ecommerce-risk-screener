@@ -1,3 +1,5 @@
+"""Run development retrieval; may load/download an embedding model and write CSV."""
+
 from pathlib import Path
 
 import pandas as pd

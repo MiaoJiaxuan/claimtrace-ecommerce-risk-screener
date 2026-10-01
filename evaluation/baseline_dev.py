@@ -1,3 +1,5 @@
+"""Run development-set rule baseline and write results/dev_baseline.csv."""
+
 from pathlib import Path
 
 import pandas as pd

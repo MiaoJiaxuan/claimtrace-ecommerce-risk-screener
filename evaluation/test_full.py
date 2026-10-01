@@ -1,3 +1,5 @@
+"""Run/resume model-backed locked-test scoring; may cost money and writes results."""
+
 from pathlib import Path
 import pandas as pd
 from src.risk_pipeline import ClaimTracePipeline

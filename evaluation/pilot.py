@@ -1,3 +1,5 @@
+"""Run five model-backed development pilot items and write a result CSV."""
+
 from pathlib import Path
 
 import pandas as pd

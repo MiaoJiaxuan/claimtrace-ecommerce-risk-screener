@@ -1,3 +1,5 @@
+"""Define and validate the structured ClaimTrace model response schema."""
+
 from typing import Literal, Optional
 
 from pydantic import BaseModel, Field

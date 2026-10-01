@@ -1,3 +1,5 @@
+"""Run or resume model-backed development assessments and append result rows."""
+
 from pathlib import Path
 
 import pandas as pd

@@ -1,3 +1,5 @@
+"""Apply the transparent keyword-and-pattern comparison baseline."""
+
 import re
 
 

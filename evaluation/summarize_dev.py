@@ -1,3 +1,5 @@
+"""Summarise saved development results and write results/dev_summary.csv."""
+
 from pathlib import Path
 
 import pandas as pd

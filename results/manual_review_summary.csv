@@ -1,0 +1,85 @@
+﻿group,metric,category,count,numerator,denominator,rate,definition
+all,sample_count,all,20,,,,Reviewed records in this group
+all,citation_present,yes,11,,,,Count of citation_present=yes
+all,citation_present,no,9,,,,Count of citation_present=no
+all,citation_present,uncertain,0,,,,Count of citation_present=uncertain
+all,citation_supported,yes,10,,,,Count of citation_supported=yes
+all,citation_supported,no,1,,,,Count of citation_supported=no
+all,citation_supported,uncertain,0,,,,Count of citation_supported=uncertain
+all,citation_supported,not_applicable,9,,,,Count of citation_supported=not_applicable
+all,reason_supported,yes,13,,,,Count of reason_supported=yes
+all,reason_supported,no,2,,,,Count of reason_supported=no
+all,reason_supported,uncertain,5,,,,Count of reason_supported=uncertain
+all,reason_supported,not_applicable,0,,,,Count of reason_supported=not_applicable
+all,recommendation_actionable,yes,0,,,,Count of recommendation_actionable=yes
+all,recommendation_actionable,no,0,,,,Count of recommendation_actionable=no
+all,recommendation_actionable,uncertain,0,,,,Count of recommendation_actionable=uncertain
+all,recommendation_actionable,not_applicable,20,,,,Count of recommendation_actionable=not_applicable
+all,uncertainty_clear,yes,9,,,,Count of uncertainty_clear=yes
+all,uncertainty_clear,no,4,,,,Count of uncertainty_clear=no
+all,uncertainty_clear,uncertain,7,,,,Count of uncertainty_clear=uncertain
+all,uncertainty_clear,not_applicable,0,,,,Count of uncertainty_clear=not_applicable
+all,human_final_label,high_risk,8,,,,Count of human_final_label=high_risk
+all,human_final_label,evidence_needed,10,,,,Count of human_final_label=evidence_needed
+all,human_final_label,low_risk,2,,,,Count of human_final_label=low_risk
+all,review_status,completed,20,,,,Count of review_status=completed
+all,review_status,pending,0,,,,Count of review_status=pending
+all,review_status,needs_revision,0,,,,Count of review_status=needs_revision
+all,citation_accuracy,strict,,10,11,0.9091,"Numerator: citation_supported=yes. Denominator: completed records with citation_present=yes and citation_supported in {yes,no}. uncertain and not_applicable are reported separately."
+all,citation_coverage,all_reviewed,,11,20,0.5500,Records with citation_present=yes divided by all reviewed records in the group
+case_derived,sample_count,all,10,,,,Reviewed records in this group
+case_derived,citation_present,yes,9,,,,Count of citation_present=yes
+case_derived,citation_present,no,1,,,,Count of citation_present=no
+case_derived,citation_present,uncertain,0,,,,Count of citation_present=uncertain
+case_derived,citation_supported,yes,8,,,,Count of citation_supported=yes
+case_derived,citation_supported,no,1,,,,Count of citation_supported=no
+case_derived,citation_supported,uncertain,0,,,,Count of citation_supported=uncertain
+case_derived,citation_supported,not_applicable,1,,,,Count of citation_supported=not_applicable
+case_derived,reason_supported,yes,5,,,,Count of reason_supported=yes
+case_derived,reason_supported,no,0,,,,Count of reason_supported=no
+case_derived,reason_supported,uncertain,5,,,,Count of reason_supported=uncertain
+case_derived,reason_supported,not_applicable,0,,,,Count of reason_supported=not_applicable
+case_derived,recommendation_actionable,yes,0,,,,Count of recommendation_actionable=yes
+case_derived,recommendation_actionable,no,0,,,,Count of recommendation_actionable=no
+case_derived,recommendation_actionable,uncertain,0,,,,Count of recommendation_actionable=uncertain
+case_derived,recommendation_actionable,not_applicable,10,,,,Count of recommendation_actionable=not_applicable
+case_derived,uncertainty_clear,yes,1,,,,Count of uncertainty_clear=yes
+case_derived,uncertainty_clear,no,4,,,,Count of uncertainty_clear=no
+case_derived,uncertainty_clear,uncertain,5,,,,Count of uncertainty_clear=uncertain
+case_derived,uncertainty_clear,not_applicable,0,,,,Count of uncertainty_clear=not_applicable
+case_derived,human_final_label,high_risk,4,,,,Count of human_final_label=high_risk
+case_derived,human_final_label,evidence_needed,6,,,,Count of human_final_label=evidence_needed
+case_derived,human_final_label,low_risk,0,,,,Count of human_final_label=low_risk
+case_derived,review_status,completed,10,,,,Count of review_status=completed
+case_derived,review_status,pending,0,,,,Count of review_status=pending
+case_derived,review_status,needs_revision,0,,,,Count of review_status=needs_revision
+case_derived,citation_accuracy,strict,,8,9,0.8889,"Numerator: citation_supported=yes. Denominator: completed records with citation_present=yes and citation_supported in {yes,no}. uncertain and not_applicable are reported separately."
+case_derived,citation_coverage,all_reviewed,,9,10,0.9000,Records with citation_present=yes divided by all reviewed records in the group
+synthetic,sample_count,all,10,,,,Reviewed records in this group
+synthetic,citation_present,yes,2,,,,Count of citation_present=yes
+synthetic,citation_present,no,8,,,,Count of citation_present=no
+synthetic,citation_present,uncertain,0,,,,Count of citation_present=uncertain
+synthetic,citation_supported,yes,2,,,,Count of citation_supported=yes
+synthetic,citation_supported,no,0,,,,Count of citation_supported=no
+synthetic,citation_supported,uncertain,0,,,,Count of citation_supported=uncertain
+synthetic,citation_supported,not_applicable,8,,,,Count of citation_supported=not_applicable
+synthetic,reason_supported,yes,8,,,,Count of reason_supported=yes
+synthetic,reason_supported,no,2,,,,Count of reason_supported=no
+synthetic,reason_supported,uncertain,0,,,,Count of reason_supported=uncertain
+synthetic,reason_supported,not_applicable,0,,,,Count of reason_supported=not_applicable
+synthetic,recommendation_actionable,yes,0,,,,Count of recommendation_actionable=yes
+synthetic,recommendation_actionable,no,0,,,,Count of recommendation_actionable=no
+synthetic,recommendation_actionable,uncertain,0,,,,Count of recommendation_actionable=uncertain
+synthetic,recommendation_actionable,not_applicable,10,,,,Count of recommendation_actionable=not_applicable
+synthetic,uncertainty_clear,yes,8,,,,Count of uncertainty_clear=yes
+synthetic,uncertainty_clear,no,0,,,,Count of uncertainty_clear=no
+synthetic,uncertainty_clear,uncertain,2,,,,Count of uncertainty_clear=uncertain
+synthetic,uncertainty_clear,not_applicable,0,,,,Count of uncertainty_clear=not_applicable
+synthetic,human_final_label,high_risk,4,,,,Count of human_final_label=high_risk
+synthetic,human_final_label,evidence_needed,4,,,,Count of human_final_label=evidence_needed
+synthetic,human_final_label,low_risk,2,,,,Count of human_final_label=low_risk
+synthetic,review_status,completed,10,,,,Count of review_status=completed
+synthetic,review_status,pending,0,,,,Count of review_status=pending
+synthetic,review_status,needs_revision,0,,,,Count of review_status=needs_revision
+synthetic,citation_accuracy,strict,,2,2,1.0000,"Numerator: citation_supported=yes. Denominator: completed records with citation_present=yes and citation_supported in {yes,no}. uncertain and not_applicable are reported separately."
+synthetic,citation_coverage,all_reviewed,,2,10,0.2000,Records with citation_present=yes divided by all reviewed records in the group

@@ -1,3 +1,5 @@
+"""Run the locked-test rule baseline; writes results/test_baseline.csv."""
+
 from pathlib import Path
 import pandas as pd
 from src.rules_baseline import assess_by_rules

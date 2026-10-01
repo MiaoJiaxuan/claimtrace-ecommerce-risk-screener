@@ -1,0 +1,60 @@
+﻿system,scope,metric,class_label,count,numerator,denominator,value,definition
+reference,locked_test_distribution,actual_count,high_risk,12.0,,,,
+reference,locked_test_distribution,actual_count,evidence_needed,13.0,,,,
+reference,locked_test_distribution,actual_count,low_risk,5.0,,,,
+rule_baseline,one_vs_rest,tp,high_risk,3.0,,,,
+rule_baseline,one_vs_rest,fp,high_risk,0.0,,,,
+rule_baseline,one_vs_rest,tn,high_risk,18.0,,,,
+rule_baseline,one_vs_rest,fn,high_risk,9.0,,,,
+rule_baseline,one_vs_rest,precision,high_risk,,3.0,3.0,1.0,TP / (TP + FP)
+rule_baseline,one_vs_rest,recall,high_risk,,3.0,12.0,0.25,TP / (TP + FN)
+rule_baseline,one_vs_rest,f1,high_risk,,,,0.4,Harmonic mean of precision and recall
+rule_baseline,one_vs_rest,tp,evidence_needed,4.0,,,,
+rule_baseline,one_vs_rest,fp,evidence_needed,1.0,,,,
+rule_baseline,one_vs_rest,tn,evidence_needed,16.0,,,,
+rule_baseline,one_vs_rest,fn,evidence_needed,9.0,,,,
+rule_baseline,one_vs_rest,precision,evidence_needed,,4.0,5.0,0.8,TP / (TP + FP)
+rule_baseline,one_vs_rest,recall,evidence_needed,,4.0,13.0,0.3076923076923077,TP / (TP + FN)
+rule_baseline,one_vs_rest,f1,evidence_needed,,,,0.4444444444444444,Harmonic mean of precision and recall
+rule_baseline,one_vs_rest,tp,low_risk,5.0,,,,
+rule_baseline,one_vs_rest,fp,low_risk,17.0,,,,
+rule_baseline,one_vs_rest,tn,low_risk,8.0,,,,
+rule_baseline,one_vs_rest,fn,low_risk,0.0,,,,
+rule_baseline,one_vs_rest,precision,low_risk,,5.0,22.0,0.22727272727272727,TP / (TP + FP)
+rule_baseline,one_vs_rest,recall,low_risk,,5.0,5.0,1.0,TP / (TP + FN)
+rule_baseline,one_vs_rest,f1,low_risk,,,,0.37037037037037035,Harmonic mean of precision and recall
+rule_baseline,three_reference_classes,macro_f1,,,,,0.4049382716049383,"Unweighted mean of F1 for high_risk, evidence_needed and low_risk; insufficient_evidence counts as a miss for its true class"
+rule_baseline,prediction_distribution,predicted_count,high_risk,3.0,,,,
+rule_baseline,prediction_distribution,predicted_count,evidence_needed,5.0,,,,
+rule_baseline,prediction_distribution,predicted_count,low_risk,22.0,,,,
+rule_baseline,prediction_distribution,predicted_count,insufficient_evidence,0.0,,,,
+rule_baseline,all_locked_test,coverage_rate,,,30.0,30.0,1.0,Non-abstained predictions / all locked-test records
+rule_baseline,all_locked_test,abstention_rate,,,0.0,30.0,0.0,insufficient_evidence predictions / all locked-test records
+claimtrace,one_vs_rest,tp,high_risk,10.0,,,,
+claimtrace,one_vs_rest,fp,high_risk,7.0,,,,
+claimtrace,one_vs_rest,tn,high_risk,11.0,,,,
+claimtrace,one_vs_rest,fn,high_risk,2.0,,,,
+claimtrace,one_vs_rest,precision,high_risk,,10.0,17.0,0.5882352941176471,TP / (TP + FP)
+claimtrace,one_vs_rest,recall,high_risk,,10.0,12.0,0.8333333333333334,TP / (TP + FN)
+claimtrace,one_vs_rest,f1,high_risk,,,,0.6896551724137931,Harmonic mean of precision and recall
+claimtrace,one_vs_rest,tp,evidence_needed,0.0,,,,
+claimtrace,one_vs_rest,fp,evidence_needed,0.0,,,,
+claimtrace,one_vs_rest,tn,evidence_needed,17.0,,,,
+claimtrace,one_vs_rest,fn,evidence_needed,13.0,,,,
+claimtrace,one_vs_rest,precision,evidence_needed,,0.0,0.0,0.0,TP / (TP + FP)
+claimtrace,one_vs_rest,recall,evidence_needed,,0.0,13.0,0.0,TP / (TP + FN)
+claimtrace,one_vs_rest,f1,evidence_needed,,,,0.0,Harmonic mean of precision and recall
+claimtrace,one_vs_rest,tp,low_risk,3.0,,,,
+claimtrace,one_vs_rest,fp,low_risk,0.0,,,,
+claimtrace,one_vs_rest,tn,low_risk,25.0,,,,
+claimtrace,one_vs_rest,fn,low_risk,2.0,,,,
+claimtrace,one_vs_rest,precision,low_risk,,3.0,3.0,1.0,TP / (TP + FP)
+claimtrace,one_vs_rest,recall,low_risk,,3.0,5.0,0.6,TP / (TP + FN)
+claimtrace,one_vs_rest,f1,low_risk,,,,0.7499999999999999,Harmonic mean of precision and recall
+claimtrace,three_reference_classes,macro_f1,,,,,0.47988505747126436,"Unweighted mean of F1 for high_risk, evidence_needed and low_risk; insufficient_evidence counts as a miss for its true class"
+claimtrace,prediction_distribution,predicted_count,high_risk,17.0,,,,
+claimtrace,prediction_distribution,predicted_count,evidence_needed,0.0,,,,
+claimtrace,prediction_distribution,predicted_count,low_risk,3.0,,,,
+claimtrace,prediction_distribution,predicted_count,insufficient_evidence,10.0,,,,
+claimtrace,all_locked_test,coverage_rate,,,20.0,30.0,0.6666666666666666,Non-abstained predictions / all locked-test records
+claimtrace,all_locked_test,abstention_rate,,,10.0,30.0,0.3333333333333333,insufficient_evidence predictions / all locked-test records

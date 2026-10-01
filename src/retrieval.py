@@ -1,3 +1,5 @@
+"""Load the case corpus and rank evidence by multilingual cosine similarity."""
+
 from pathlib import Path
 
 import pandas as pd

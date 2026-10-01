@@ -1,3 +1,5 @@
+"""Compare saved locked-test predictions and write a row-level CSV."""
+
 import pandas as pd
 
 trace = pd.read_csv("results/test_full.csv")

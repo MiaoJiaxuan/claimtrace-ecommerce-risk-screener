@@ -1,3 +1,5 @@
+"""Create the fixed test copy only when absent; never rebuild an existing holdout."""
+
 from pathlib import Path
 import pandas as pd
 

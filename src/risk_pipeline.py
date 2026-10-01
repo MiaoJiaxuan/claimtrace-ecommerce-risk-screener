@@ -1,3 +1,5 @@
+"""Coordinate case retrieval, provisional abstention and one model call."""
+
 from src.llm_client import OpenRouterClient
 from src.retrieval import CaseRetriever
 

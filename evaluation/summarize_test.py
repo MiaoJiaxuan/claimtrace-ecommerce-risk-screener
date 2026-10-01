@@ -1,3 +1,5 @@
+"""Summarise saved locked-test outputs and write results/test_summary.csv."""
+
 from pathlib import Path
 
 import pandas as pd
