@@ -9,7 +9,7 @@ ClaimTrace supports preliminary review. A person must verify the claim and suppo
 ## Start here
 
 - **Problem statement:** [user need, workflow and evaluation objective](docs/PROBLEM_STATEMENT_EN.md).
-- **Report:** [PDF](docs/BUSINESS_TECHNICAL_TRADEOFF_EN.pdf), [Word](docs/BUSINESS_TECHNICAL_TRADEOFF_EN.docx), [Markdown](docs/BUSINESS_TECHNICAL_TRADEOFF_EN.md).
+- **Report:** [Business and technical tradeoff analysis (PDF)](docs/BUSINESS_TECHNICAL_TRADEOFF_EN.pdf).
 - **Product:** [persona, inputs, outputs and architecture](docs/PRODUCT_DOCUMENTATION_EN.md).
 - **Evidence:** [data guide](data/README.md), [evaluation guide](evaluation/README.md), [saved results](results/README.md), [metrics and denominators](docs/EVALUATION_EVIDENCE_EN.md).
 - **Verification:** [installation and offline checks](docs/REPRODUCTION_CHECK_EN.md), [two-request usage record](docs/REQUEST_USAGE_EVIDENCE_EN.md).

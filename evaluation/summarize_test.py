@@ -8,9 +8,9 @@ import pandas as pd
 data = pd.read_csv("results/test_full.csv")
 
 if len(data) != 30 or data["claim_id"].duplicated().any():
-    raise ValueError("Expected 60 unique development results")
+    raise ValueError("Expected 30 unique locked-test results")
 
-# 明确识别 True/False，避免把“转人工”误算成分类结果。
+# Parse boolean values explicitly so abstentions are not counted as classifications.
 data["abstained_bool"] = (
     data["abstained"].astype(str).str.lower().eq("true")
 )

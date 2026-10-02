@@ -7,7 +7,7 @@ from src.rules_baseline import assess_by_rules
 test = pd.read_csv("evaluation/test_set_locked.csv")
 
 if len(test) != 30 or test["claim_id"].duplicated().any():
-    raise ValueError("锁定测试集应有 30 条，且编号不能重复")
+    raise ValueError("The locked test set must contain 30 unique claim IDs")
 
 rows = []
 for claim in test.itertuples(index=False):

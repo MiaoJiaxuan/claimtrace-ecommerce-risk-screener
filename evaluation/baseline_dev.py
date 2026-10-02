@@ -10,7 +10,7 @@ claims = pd.read_csv("data/claims.csv")
 dev = claims[claims["split"] == "development"]
 
 if len(dev) != 60 or dev["claim_id"].duplicated().any():
-    raise ValueError("开发集应有 60 条，且 claim_id 不能重复")
+    raise ValueError("The development set must contain 60 unique claim IDs")
 
 rows = []
 for claim in dev.itertuples(index=False):

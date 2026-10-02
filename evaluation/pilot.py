@@ -8,11 +8,11 @@ from src.risk_pipeline import ClaimTracePipeline
 
 
 PILOT_IDS = [
-    "CLAIM001",  # 需要证据
-    "CLAIM002",  # 高风险
-    "CLAIM046",  # 普通商品描述，但检索分数超过阈值
-    "CLAIM064",  # 高风险，但检索证据不足
-    "CLAIM071",  # 需要证据，但检索证据不足
+    "CLAIM001",  # Evidence needed
+    "CLAIM002",  # High risk
+    "CLAIM046",  # Ordinary description above the retrieval threshold
+    "CLAIM064",  # High risk with weak retrieval evidence
+    "CLAIM071",  # Evidence needed with weak retrieval evidence
 ]
 
 claims = pd.read_csv("data/claims.csv")

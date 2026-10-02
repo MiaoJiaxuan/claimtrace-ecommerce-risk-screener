@@ -8,11 +8,11 @@ OUTPUT = Path("results/test_full.csv")
 test = pd.read_csv("evaluation/test_set_locked.csv")
 
 if len(test) != 30 or test["claim_id"].duplicated().any():
-    raise ValueError("锁定测试集应有 30 条，且编号不能重复")
+    raise ValueError("The locked test set must contain 30 unique claim IDs")
 
 OUTPUT.parent.mkdir(exist_ok=True)
 
-# 中途停止后再运行，会跳过已经保存的文案。
+# Resume without repeating claims already saved before an interruption.
 done = set()
 if OUTPUT.exists() and OUTPUT.stat().st_size > 0:
     done = set(pd.read_csv(OUTPUT)["claim_id"])

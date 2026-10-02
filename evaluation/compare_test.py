@@ -6,7 +6,7 @@ trace = pd.read_csv("results/test_full.csv")
 baseline = pd.read_csv("results/test_baseline.csv")
 
 if len(trace) != 30 or len(baseline) != 30:
-    raise ValueError("两份测试结果都应有 30 条")
+    raise ValueError("Both saved test result files must contain 30 rows")
 
 baseline = baseline[["claim_id", "predicted_label"]].rename(
     columns={"predicted_label": "baseline_label"}

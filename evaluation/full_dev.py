@@ -17,7 +17,7 @@ if len(development) != 60:
 
 OUTPUT.parent.mkdir(exist_ok=True)
 
-# 如果中途停止，再运行时跳过已经保存的文案。
+# Resume without repeating claims already saved before an interruption.
 done = set()
 if OUTPUT.exists():
     done = set(pd.read_csv(OUTPUT)["claim_id"])

@@ -57,4 +57,4 @@ The following results use the saved 30-item locked evaluation, which predates th
 | Ten-query Chinese retrieval audit | Check retrieval on Chinese development queries | Exact expected ID 7/10; semantic relevance and risk-reminder support 10/10 | Selected development sample of ten queries. |
 | Citation support in human review | Check cited evidence where applicable | 10/11 = 90.9% of assessable citations among 20 reviewed items | Nine records have no applicable citation. |
 
-The [evaluation guide](../evaluation/README.md), [evidence tables](EVALUATION_EVIDENCE_EN.md) and [report](BUSINESS_TECHNICAL_TRADEOFF_EN.md) document sources and denominators. The locked labels and outputs remain fixed; future model and threshold choices require development data and a new holdout.
+The [evaluation guide](../evaluation/README.md), [evidence tables](EVALUATION_EVIDENCE_EN.md) and [report](BUSINESS_TECHNICAL_TRADEOFF_EN.pdf) document sources and denominators. The locked labels and outputs remain fixed; future model and threshold choices require development data and a new holdout.
