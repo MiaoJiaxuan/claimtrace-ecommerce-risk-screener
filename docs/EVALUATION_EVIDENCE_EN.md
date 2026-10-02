@@ -1,6 +1,6 @@
 # Evaluation evidence and denominators
 
-This guide links reported numbers to saved evidence. It does not describe a new model run. Reference labels and the locked holdout remain unchanged; later UI and response-guard improvements are not retroactively attributed to these results.
+This guide links the reported numbers to saved evaluation files. The evaluation predates the later UI and response-guard changes.
 
 ## Locked sample and system comparison
 
@@ -30,7 +30,7 @@ Three-class Macro F1 averages the F1 scores of `high_risk`, `evidence_needed` an
 
 ## Chinese retrieval audit
 
-The [ten-query audit](../evaluation/retrieval_audit_10.csv) uses selected case-derived development queries and saved [development retrieval output](../results/dev_retrieval.csv), not the locked test. Ten reviews are completed. Exact expected-case matches are 7/10; semantic relevance and support for a risk reminder are both 10/10 according to the human review fields. No new retrieval run was needed to build the audit. A different case ID can still be relevant; these selected examples do not estimate general retrieval accuracy or compare embedding models experimentally.
+The [ten-query audit](../evaluation/retrieval_audit_10.csv) uses selected case-derived development queries and saved [development retrieval output](../results/dev_retrieval.csv), not the locked test. Ten reviews are completed. Exact expected-case matches are 7/10; semantic relevance and support for a risk reminder are both 10/10 according to the human review fields. The audit reuses the saved retrieval output. A different case ID can still be relevant; these selected examples do not estimate general retrieval accuracy or compare embedding models experimentally.
 
 ## Human review
 
@@ -42,7 +42,7 @@ The [review workbook](../evaluation/manual_review_20.xlsx) and [structured summa
 | Case-derived | 10 | 8/9 = 88.9% | 1 | 0 |
 | Synthetic | 10 | 2/2 = 100% | 8 | 0 |
 
-The denominator includes only `citation_present=yes` and `citation_supported=yes` or `no`. It excludes `not_applicable` and `uncertain`, listed separately above. All 20 recommendation-actionability entries are `not_applicable` because historical outputs omit `next_action`; this is not evidence that recommendations were useful. Natural-language reviewer notes and final human labels are preserved. The earlier six-row `manual_review.csv` is not the completed review workbook.
+The denominator includes only `citation_present=yes` and `citation_supported=yes` or `no`. It excludes `not_applicable` and `uncertain`, listed separately above. All 20 recommendation-actionability entries are `not_applicable` because historical outputs omit `next_action`. Natural-language reviewer notes and final human labels are preserved.
 
 ## Costs and technical verification
 

@@ -5,6 +5,7 @@ from pathlib import Path
 import streamlit as st
 
 from src.rules_baseline import assess_by_rules
+from src.case_display import display_case
 from src.ui_components import (
     inject_styles,
     render_boundary_notice,
@@ -50,8 +51,8 @@ def load_pipeline():
 def initialise_state() -> None:
     """Create persistent UI state without overwriting existing input."""
     defaults = {
-        "language": "zh",
-        "language_selector": "中文",
+        "language": "en",
+        "language_selector": "English",
         "claim_input": "",
         "assessment": None,
         "intro_played": False,
@@ -63,8 +64,8 @@ def initialise_state() -> None:
 
 def sync_language() -> None:
     """Keep the selected language in session state across reruns."""
-    selected = st.session_state.get("language_selector", "中文")
-    st.session_state["language"] = "zh" if selected == "中文" else "en"
+    selected = st.session_state.get("language_selector", "English")
+    st.session_state["language"] = "zh" if selected == "Chinese" else "en"
 
 
 def clear_assessment() -> None:
@@ -97,7 +98,7 @@ with top_brand:
 with top_language:
     st.segmented_control(
         t("language_label", lang),
-        options=["中文", "English"],
+        options=["English", "Chinese"],
         key="language_selector",
         on_change=sync_language,
         label_visibility="collapsed",
@@ -291,7 +292,13 @@ if assessment:
 
         if risk_card.get("source_title"):
             st.markdown(f"### {t('supporting_source', lang)}")
-            st.write(risk_card["source_title"])
+            cited_case = next(
+                (case for case in (retrieval or {}).get("retrieved_cases", [])
+                 if case.get("title") == risk_card["source_title"]
+                 and case.get("source_url") == risk_card.get("source_url")),
+                {"title": risk_card["source_title"]},
+            )
+            st.write(display_case(cited_case, lang)["title"])
             if risk_card.get("source_url"):
                 st.link_button(
                     t("open_cited_source", lang),

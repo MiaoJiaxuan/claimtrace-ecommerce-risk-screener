@@ -13,6 +13,7 @@ from src.rules_baseline import (
     find_matches,
 )
 from src.ui_text import RISK_TEXT, t
+from src.case_display import display_case
 
 
 STYLE_PATH = Path(__file__).resolve().parents[1] / "tokens.css"
@@ -815,6 +816,8 @@ def render_reason_action(
             )
 
 def render_case_card(case: dict, index: int, lang: str) -> None:
+    original = case
+    case = display_case(case, lang)
     title = escape(str(case.get("title") or t("none", lang)))
     case_text = escape(str(case.get("case_text") or ""))
     case_id = escape(str(case.get("case_id") or ""))
@@ -834,6 +837,10 @@ def render_case_card(case: dict, index: int, lang: str) -> None:
     )
     if case.get("source_url"):
         st.link_button(t("official_source", lang), case["source_url"], use_container_width=True)
+    if lang == "en":
+        with st.expander("Original Chinese source text"):
+            st.write(original.get("title", ""))
+            st.write(original.get("case_text", ""))
 
 
 def _rule_key(pattern: str) -> str:

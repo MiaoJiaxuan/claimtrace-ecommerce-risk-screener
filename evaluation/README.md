@@ -1,6 +1,6 @@
-# Evaluation files and safe-use guide
+# Evaluation guide
 
-This directory contains the locked holdout, saved human audits, and scripts used to produce development or test artifacts. Read a script before running it: several files execute at module scope and write to `results/`; some call OpenRouter or load/download the embedding model. The safest routine check is the offline unit-test command in the root README, which targets only `tests/`.
+This directory contains the locked holdout, human reviews and evaluation scripts. Model-backed scripts can incur OpenRouter charges and load embedding weights. The table below identifies their outputs. Run experiments in an isolated copy to preserve the saved results; `pytest.ini` limits routine tests to `tests/`.
 
 ## Evidence files
 
@@ -9,8 +9,7 @@ This directory contains the locked holdout, saved human audits, and scripts used
 | `test_set_locked.csv` | 30 fixed test claims and project reference labels | Protected holdout: 12 `high_risk`, 13 `evidence_needed`, 5 `low_risk`. Never edit or use for tuning. |
 | `retrieval_audit_10.csv` | Ten human-checked Chinese development queries | 7/10 exact expected case-ID matches; all ten were judged semantically relevant and supportive of a risk reminder. This selected sample is not a general retrieval-accuracy estimate. |
 | `manual_review_20.xlsx` | Twenty completed human reviews, split evenly between case-derived and synthetic samples | Retains reviewer conclusions and structured checks; see `../results/manual_review_summary.csv` for counts. Recommendation actionability was not assessable from missing historical `next_action` values. |
-| `manual_review.csv` | Earlier six-row work log | It is not the completed twenty-item review. |
-| `../results/test_baseline.csv`, `test_full.csv`, `test_summary.csv`, `test_metrics.csv` | Saved historical locked-set outputs and summaries | Treat these as saved results, not as proof that the current UI or later response guards were part of the evaluated version. |
+| `../results/test_baseline.csv`, `test_full.csv`, `test_summary.csv`, `test_metrics.csv` | Saved historical locked-set outputs and summaries | The saved evaluation predates the current response guards. |
 | `../results/dev_retrieval.csv` | Saved development retrieval output | Reuse for documented analyses; do not rerun retrieval just to reproduce the audit unless model/environment details and output destination are controlled. |
 
 ## Script inventory and side effects
@@ -30,12 +29,12 @@ This directory contains the locked holdout, saved human audits, and scripts used
 
 ## What the reported metrics mean
 
-The baseline and ClaimTrace use the same 30 saved IDs and project reference labels. For the original combined positive class (`high_risk` plus `evidence_needed`), there are 25 positives; the saved ClaimTrace result detects 17, giving recall 17/25 = 68%, below the proposal's 80% target. `insufficient_evidence` is a human-review abstention, not an automatic detection. For the separate `high_risk` class there are 12 positives; ClaimTrace recall is 10/12 = 83.3%, with precision 10/17 = 58.8%. Do not substitute this class-specific recall for the unmet combined target.
+The baseline and ClaimTrace use the same 30 saved IDs and project reference labels. For the original combined positive class (`high_risk` plus `evidence_needed`), there are 25 positives; the saved ClaimTrace result detects 17, giving recall 17/25 = 68%, below the proposal's 80% target. `insufficient_evidence` is a human-review abstention, not an automatic detection. For the separate `high_risk` class there are 12 positives; ClaimTrace recall is 10/12 = 83.3%, with precision 10/17 = 58.8%. The two positive-class definitions are reported separately.
 
-Three-class Macro F1 is the unweighted average of F1 for the three project labels; the saved values are 40.5% for the rule baseline and 48.0% for ClaimTrace. ClaimTrace predicted no `evidence_needed` labels. Coverage is 20/30 = 66.7%; abstention/human-review prompt rate is 10/30 = 33.3%; judged-item label agreement is 13/20 = 65.0%. A human-review prompt is not an actual ticket or assignment.
+Three-class Macro F1 is the unweighted average of F1 for the three project labels; the saved values are 40.5% for the rule baseline and 48.0% for ClaimTrace. ClaimTrace predicted no `evidence_needed` labels. Coverage is 20/30 = 66.7%; abstention/human-review prompt rate is 10/30 = 33.3%; judged-item label agreement is 13/20 = 65.0%. The seller arranges human review when requested.
 
-For the 20 completed human reviews, citation support is 10/11 = 90.9% among records with a citation marked present and assessable. It is not a 30-item or production-wide citation accuracy. See the [evidence tables](../docs/EVALUATION_EVIDENCE_EN.md) and [product documentation](../docs/PRODUCT_DOCUMENTATION_EN.md) for sources, labels and denominators.
+For the 20 completed human reviews, citation support is 10/11 = 90.9% among records with a citation marked present and assessable. Nine reviewed records have no applicable citation. See the [evidence tables](../docs/EVALUATION_EVIDENCE_EN.md) and [product documentation](../docs/PRODUCT_DOCUMENTATION_EN.md) for sources, labels and denominators.
 
 ## Re-running safely
 
-Run any script that writes `results/` only in a fresh isolated copy and redirect outputs there. Never run the locked test pipeline to tune or compare alternatives. Do not run a model-backed script without explicit approval for the sample selection, network access and cost. The repository's offline unit tests are not a replacement for the historical evaluation and do not call OpenRouter.
+Use an isolated copy for scripts that write to `results/`. Select model or threshold changes on development data, then evaluate a new holdout. Preserve the original locked labels and predictions for comparison. Routine unit tests use fixed mocks and make no OpenRouter requests.

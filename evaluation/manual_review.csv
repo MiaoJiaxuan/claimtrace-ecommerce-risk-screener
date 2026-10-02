@@ -1,7 +1,0 @@
-claim_id,reference_label,system_label,status,review_note
-CLAIM001,evidence_needed,high_risk,pending,"CASE001 concerns an earlier advertiser. Similar wording does not establish that a new seller's price or data allowance is false."
-CLAIM072,evidence_needed,low_risk,pending,"The pure titanium material claim needs product or supplier verification. No matching violation case does not prove the material claim is true."
-CLAIM031,evidence_needed,high_risk,completed,"输入与判断：9元且不限量高速流量需要当前商品的资费和流量凭证，风险提醒有依据，但尚不能认定当前承诺虚假；引用：官方案例认定的是另一家公司类似宣传与实际不符，只能支持类比风险，不能证明这张卡也不实；建议可执行性：原测试结果未保存next_action，暂无法核查；不确定性：模型理由称存在误导风险，但给出high_risk，标签分歧仍需人工判断。人工结论：当前证据更支持 evidence_needed，而不是 high_risk。"
-CLAIM039,evidence_needed,high_risk,pending,"旧案例中的假珍珠和伪造证书不能直接证明本店也存在同样问题。"
-CLAIM084,high_risk,insufficient_evidence,pending,"百分之百预防静脉曲张的宣称值得重点复核但系统因检索证据不足转人工。"
-CLAIM090,high_risk,insufficient_evidence,pending,"保证治愈腰椎间盘突出的宣称被规则识别但ClaimTrace因检索证据不足转人工。"

@@ -224,3 +224,7 @@ __pycache__/
 
 # Local privacy-minimised request metrics
 logs/*.jsonl
+
+# Local environment backups and editor temporary files
+.venv.broken-*/
+~$*
