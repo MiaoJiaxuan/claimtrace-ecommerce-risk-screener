@@ -1,60 +1,58 @@
-# ClaimTrace Business and Technical Trade-off Analysis
+# ClaimTrace Business and Technical Tradeoff Analysis
 
-ClaimTrace is a working prototype for screening Chinese e-commerce product claims. Its current evidence does not meet the proposal's 80% recall target for high-risk and evidence-needed claims combined: observed recall is 68% on the locked 30-item set. The prototype can surface claims for review, but it cannot approve copy or replace a human decision.
+Miao Jiaxuan | PE6201
 
 ## Problem and intended users
 
-ClaimTrace is designed for small e-commerce sellers preparing Chinese product-page copy. The narrower assumption that some lack in-house compliance support has not been validated through seller interviews. In my previous copy-editing work, I checked claims against a company prohibited-words list before a supervisor reviewed them. I recall spending one to three minutes per item, but did not time it; this is personal context, not seller research or measured savings.
+ClaimTrace screens Chinese e-commerce advertising claims for small sellers. It combines a rule baseline, related enforcement cases and a model-generated risk card in one interface. The prototype improves access to contextual evidence, but its combined risk-detection recall of 68% falls short of the proposal's 80% target. This limits its usefulness as an automated screening system.
 
-The prototype retrieves related public enforcement cases and returns a preliminary risk card. It can flag potentially risky claims, including cure or disease-prevention claims, but does not provide legal, medical, financial or other professional advice. `low_risk` is not legal approval; publication still requires human review. A review prompt does not create a ticket or assign a reviewer.
+The problem comes from my previous product-copy editing work. I checked text against a company prohibited-words list, followed by a supervisor's review. I recall spending one to three minutes per item; this was not timed. Small sellers are the intended users, not an interviewed or validated customer segment. The proposed benefit is easier evidence assembly before human review, rather than proven time savings or replacement of that review.
+
+Users enter one Chinese claim and receive a screening label, reasoning and retrieved evidence, or an insufficient-evidence response. The tool can identify dangerous medical-effect advertising in ordinary product copy, but offers no professional advice. Low risk is not legal approval, and publication requires human confirmation. A human-review prompt does not assign a reviewer or create a ticket.
 
 ## Build versus buy and technical choices
 
-I built the Streamlit workflow, rules, retrieval, threshold handling, response validation and evaluation, while reusing Python libraries, a multilingual embedder and a hosted model through OpenRouter. This avoids training and hosting a foundation model, but retains service, corpus and human-verification dependencies.
+I built the Streamlit workflow, keyword rules, retrieval orchestration, response validation and evaluation. I reused Python libraries, multilingual embeddings and a hosted foundation model through OpenRouter. Buying model inference avoids training and hosting a language model, but introduces external-service dependence and requires scrutiny of generated reasoning.
 
-The retriever uses `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` with cosine similarity instead of the proposal's English-trained `all-MiniLM-L6-v2` and FAISS plan (`src/retrieval.py`; original problem statement). Its model card describes multilingual embeddings, not ClaimTrace quality (Sentence Transformers, n.d.). In a selected ten-query development audit, the top case ID matched the expected ID in 7/10 queries, while reviewers judged all ten relevant and supportive of a risk reminder; this is not a general accuracy estimate (`evaluation/retrieval_audit_10.csv`).
+The current retriever uses paraphrase-multilingual-MiniLM-L12-v2 and cosine similarity (src/retrieval.py). This addresses the teacher's concern about the proposal's English-trained MiniLM over Chinese text. The model card describes multilingual support, not performance on this project (Sentence Transformers, n.d.). With only 30 case records, direct cosine ranking is sufficient for this prototype; FAISS would add infrastructure without a demonstrated requirement. I did not train a classifier or implement an agent because the task follows a fixed retrieval-and-assessment sequence.
 
-The uncalibrated 0.30 threshold abstains below the score and permits one model call at or above it; it is not an illegality probability (`src/risk_pipeline.py`). Schema validation checks structure, not factual truth. I did not implement FAISS, train a classifier or build an agent: the workflow is a fixed sequence, and an independent LLM judge remained an optional proposal. The twenty completed reviews were human reviews, not an LLM judge (`src/schemas.py`; `src/llm_client.py`; `evaluation/manual_review_20.xlsx`; `results/manual_review_summary.csv`).
+A selected audit reused saved retrieval results for ten Chinese development queries. Seven top-ranked case IDs matched the expected IDs; all ten were manually judged relevant and supportive of a risk reminder (evaluation/retrieval_audit_10.csv). A different ID is not necessarily irrelevant. However, this small, selected audit is neither a controlled embedding comparison nor a general retrieval-accuracy estimate.
 
-## Evaluation results and trade-offs
+The provisional threshold of 0.30 permits one model request at or above the score and abstains below it (src/risk_pipeline.py). It has not been calibrated. Pydantic checks response structure; current guards suppress non-verbatim highlighted text and citations whose title-and-URL pair is absent from retrieval. These checks reduce particular output errors, not unsupported reasoning. They were added after the saved evaluation and cannot be credited with improving its metrics. An independent LLM judge was not implemented; the recorded reviews are human assessments.
 
-The locked set contains 30 unique items: 12 `high_risk`, 13 `evidence_needed` and 5 `low_risk`. The rule baseline and ClaimTrace results use the same IDs and reference labels. These are project labels, not official regulator labels (`evaluation/test_set_locked.csv`; `results/test_baseline.csv`; `results/test_full.csv`; `results/test_metrics.csv`).
+## Evaluation results and their implications
 
-| Positive-class definition | System | Precision | Recall |
+Both systems were evaluated on the same 30 locked items: 12 high_risk, 13 evidence_needed and five low_risk. Reference labels were frozen before testing and are project judgements, not regulator labels. The saved predictions and denominators are in evaluation/test_set_locked.csv, results/test_baseline.csv and results/test_full.csv.
+
+| Positive class | System | Precision | Recall |
 | --- | --- | ---: | ---: |
-| `high_risk` only (12 positives) | Rule baseline | 3/3 = 100% | 3/12 = 25% |
-| `high_risk` only (12 positives) | ClaimTrace | 10/17 = 58.8% | 10/12 = 83.3% |
-| `high_risk` + `evidence_needed` (25 positives) | Rule baseline | 8/8 = 100% | 8/25 = 32% |
-| `high_risk` + `evidence_needed` (25 positives) | ClaimTrace | 17/17 = 100% | 17/25 = 68% |
+| High risk only | Rule baseline | 3/3 = 100% | 3/12 = 25% |
+| High risk only | ClaimTrace | 10/17 = 58.8% | 10/12 = 83.3% |
+| High risk plus evidence needed | Rule baseline | 8/8 = 100% | 8/25 = 32% |
+| High risk plus evidence needed | ClaimTrace | 17/17 = 100% | 17/25 = 68% |
 
-Precision is TP/(TP+FP); recall is TP/(TP+FN). The proposal set an 80% recall target for the combined risk/evidence-needed class. ClaimTrace's 68% does not meet it; the 83.3% high-risk-only result uses a different positive class and cannot substitute for the target. `insufficient_evidence` is an abstention, not an automatic detection, so a positive item referred for review counts as a missed detection in combined recall.
+Precision is TP/(TP+FP), and recall is TP/(TP+FN). The proposal's 80% target concerns the combined class. The 83.3% high-risk recall cannot replace the unmet 68% combined result. Abstention is not automatic detection: a positive item returned as insufficient_evidence remains a false negative. ClaimTrace detects more high-risk items than the baseline, but its seven high-risk false positives would require reviewers to distinguish a warning from evidence of wrongdoing.
 
-Three-class Macro F1, the unweighted mean across `high_risk`, `evidence_needed` and `low_risk`, was 40.5% for the baseline and 48.0% for ClaimTrace. ClaimTrace predicted no `evidence_needed` items. It covered 20/30 items (66.7%) and abstained on 10/30 (33.3%). Agreement with project labels among judged items was 13/20 (65.0%); the baseline agreed on 12/30 (40.0%). These different denominators make agreement rates non-comparable. ClaimTrace's higher recall came with lower coverage and more high-risk false positives (`results/test_metrics.csv`; `results/test_summary.csv`).
+Three-class Macro F1 is 40.5% for the baseline and 48.0% for ClaimTrace, averaging F1 equally across the three reference labels and counting abstentions as misses for their true class (results/test_metrics.csv). ClaimTrace predicted no evidence_needed items despite 13 reference examples. The improvement therefore conceals a class-level failure. One additional miss changes high-risk recall by 8.3 percentage points, illustrating the estimate's sensitivity to this small sample.
 
-Human review covered 20 items (10 per source group). Ten of 11 applicable citations supported the reminder (90.9%); nine records had no applicable citation. This is not overall citation accuracy. Recommendation actionability remains unassessed because saved outputs lack `next_action`. The locked test shows judged agreement/coverage of 7/14 and 14/15 for case-derived items, and 6/6 with 6/15 for synthetic items (nine abstentions). Neither 6/6 nor these small audits establish generalisation (`results/manual_review_summary.csv`; `results/test_summary.csv`).
+Coverage is 20/30 (66.7%); abstention is 10/30 (33.3%). Label agreement among assessed items is 13/20 (65%), versus 12/30 (40%) for the baseline, so these percentages are not directly comparable. Case-derived items have 7/14 agreement and 14/15 coverage; synthetic items have 6/6 agreement but only 6/15 coverage. The nine synthetic abstentions prevent interpreting 6/6 as 100% accuracy on new claims (results/test_summary.csv). Case-derived success also does not establish generalisation to unseen cases.
 
-## Critical reflection and future direction
+Twenty human reviews cover ten items per source group. Citation support is 10/11 among present, assessable citations; nine records are not applicable. This is not overall citation accuracy. Recommendation actionability could not be assessed because historical outputs omit next_action (results/manual_review_summary.csv). Samples are partly synthetic, and no inter-rater reliability estimate is available. These weaknesses call for more independently labelled examples and a new holdout, not adjustments to the locked labels or test-set tuning.
 
-Before ClaimTrace, my own workflow checked product-page copy against a prohibited-words list and then sent it for supervisor review. The prototype puts rule matches, related public cases and a screening card in one view. This changes evidence assembly only: I have no seller interviews, deployment, timed comparison or adoption evidence, so cannot claim faster work or impact.
+## Cost privacy and next steps
 
-Thirty locked items cannot support broad claims: one miss changes high-risk recall by 8.3 percentage points and combined recall by 4 points. The same-set baseline is a reference, not evidence of marketplace performance. Macro F1 is modest at 48.0%, and the system's zero `evidence_needed` predictions reveal a class-level failure. Twenty human reviews and ten retrieval queries are small case audits; no inter-rater reliability statistic is available. Citation support of 10/11 applies only to applicable citations in the reviewed sample.
+Two subsequent successful requests used openai/gpt-4o-mini. Their non-content metadata are documented in docs/REQUEST_USAGE_EVIDENCE_EN.md; costs are service-returned usage.cost values, not price estimates (OpenRouter, n.d.).
 
-To address the English-model/Chinese-text mismatch raised in feedback, I replaced the proposal's English-trained MiniLM with a multilingual model and audited ten development queries; this was not a controlled model comparison. I did not tune the 0.30 threshold or use the locked set for tuning. New exact-span and source guards pass offline unit tests, but were not part of historical predictions and have no measured effect on reported metrics. Remaining issues include partly synthetic data, unverified source-reuse rights and link availability, and missing historical `next_action` fields.
-
-The next step is to collect more independently labelled Chinese claims, compare retrieval and threshold settings on development data only, and evaluate a frozen version on a new holdout with documented human adjudication. Until then, these results support a prototype, not a production compliance claim; the original 80% combined-recall target remains unmet.
-
-## Cost, privacy and conclusion
-
-Two successful development-sample requests were logged for `openai/gpt-4o-mini`. The OpenRouter response usage fields include prompt, completion and total tokens and may include a cost value (OpenRouter, n.d.). The local log recorded:
-
-| Request date | Input / output / total tokens | Provider-reported cost | Request-phase latency |
+| Date in 2026 | Input / output tokens | Cost in USD | Request time |
 | --- | ---: | ---: | ---: |
-| 30 Sep 2026 | 782 / 105 / 887 | US$0.0001803 | 3.044005 s |
-| 1 Oct 2026 | 809 / 173 / 982 | US$0.00022515 | 3.827186 s |
+| 30 September | 782 / 105 | 0.00018030 | 3.044005 s |
+| 1 October | 809 / 173 | 0.00022515 | 3.827186 s |
 
-Together, the two calls used 1,591 input and 278 output tokens and had a provider-reported cost of US$0.00040545. These observations do not represent the 30-item evaluation, a stable average or a forecast. The recorded latency covers the request phase, not retrieval, model loading or page rendering. The log stores neither claim text nor claim IDs, so it cannot independently identify which development items produced these calls (`logs/request_metrics.jsonl`; `src/usage_logging.py`).
+Together, these calls used 1,869 tokens and cost US$0.00040545. Two observations cannot establish stable operating cost or the cost of the historical 30-item evaluation. Timings include HTTP handling and response validation, but exclude model loading, retrieval and page rendering. The logs contain no claim IDs, preventing independent mapping to particular development items.
 
-The application sends the claim and retrieved case text to an external model service; omitting text from local logs does not keep request content on-device (`src/risk_pipeline.py`; `src/llm_client.py`). Users should not submit secrets or sensitive commercial information. Without measured seller traffic, wage data or timed review observations, I cannot calculate return on investment or claim a net time saving. The evidence supports a working prototype, not a production compliance service. Any model or threshold change should be tested on new, independently labelled claims; the locked set should remain untouched.
+Claims and retrieved case text leave the device for inference. Local logs omit that text and keys, but this does not remove the external disclosure. Users should exclude confidential content. Labour spent verifying warnings, service charges and maintenance would all enter an operating-cost model; without measured review time, traffic or wages, a return-on-investment calculation would be speculative.
+
+The next evaluation should compare retrieval models and threshold settings on development data, freeze the selected version, then test a separately labelled holdout. In parallel, observed seller use should establish whether evidence assembly actually helps reviewers. For now, ClaimTrace demonstrates a functioning, testable review workflow, with insufficient evidence for autonomous compliance decisions or business savings.
 
 ## References
 

@@ -410,12 +410,13 @@ def _intro_class(animate: bool) -> str:
 
 @lru_cache(maxsize=4)
 def _image_data_uri(path_value: str) -> str:
-    """Return a local PNG as a data URI without Streamlit image processing."""
+    """Return a local image as a data URI without Streamlit image processing."""
     image_path = Path(path_value)
     if not image_path.exists():
         return ""
     encoded = base64.b64encode(image_path.read_bytes()).decode("ascii")
-    return f"data:image/png;base64,{encoded}"
+    media_type = "image/svg+xml" if image_path.suffix.lower() == ".svg" else "image/png"
+    return f"data:{media_type};base64,{encoded}"
 
 
 def render_intro_marker(active: bool) -> None:

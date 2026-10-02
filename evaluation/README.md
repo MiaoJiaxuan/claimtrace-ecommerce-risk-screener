@@ -34,7 +34,7 @@ The baseline and ClaimTrace use the same 30 saved IDs and project reference labe
 
 Three-class Macro F1 is the unweighted average of F1 for the three project labels; the saved values are 40.5% for the rule baseline and 48.0% for ClaimTrace. ClaimTrace predicted no `evidence_needed` labels. Coverage is 20/30 = 66.7%; abstention/human-review prompt rate is 10/30 = 33.3%; judged-item label agreement is 13/20 = 65.0%. A human-review prompt is not an actual ticket or assignment.
 
-For the 20 completed human reviews, citation support is 10/11 = 90.9% among records with a citation marked present and assessable. It is not a 30-item or production-wide citation accuracy. These datasets, labels and denominators are described in `../docs/SUBMISSION_EVIDENCE.md` and `../docs/PRODUCT_DOCUMENTATION_EN.md`.
+For the 20 completed human reviews, citation support is 10/11 = 90.9% among records with a citation marked present and assessable. It is not a 30-item or production-wide citation accuracy. See the [evidence tables](../docs/EVALUATION_EVIDENCE_EN.md) and [product documentation](../docs/PRODUCT_DOCUMENTATION_EN.md) for sources, labels and denominators.
 
 ## Re-running safely
 

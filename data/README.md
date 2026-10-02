@@ -13,7 +13,7 @@ This directory contains the project claim samples, example inputs, label guide a
 
 `case_derived` items are rewritten from existing case material; `synthetic` items are constructed examples. The repository does not contain a verified generation script or complete prompt history for reproducing every item. The samples are not a random draw from real product listings, and the 30-item locked set is too small to establish population-level performance.
 
-The case URLs provide a route to the cited source, not proof that copied case text can be redistributed. At the time of this documentation, item-by-item link availability and reuse permissions have not been independently verified. Do not add a public data licence or claim redistribution rights without checking the original terms.
+The author read the linked public sources and wrote the case summaries. Each record retains its publisher, publication date, title and URL so readers can consult the original facts. The summaries are project-authored; they do not transfer the original publishers' rights or imply a blanket licence for third-party material. External pages may change or become unavailable.
 
 ## Label and test-set protection
 

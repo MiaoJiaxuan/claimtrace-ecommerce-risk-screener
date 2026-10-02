@@ -28,7 +28,7 @@ from src.ui_text import t
 
 
 ROOT = Path(__file__).resolve().parent
-HERO_IMAGE = ROOT / "assets" / "claimtrace-evidence-flow.png"
+HERO_IMAGE = ROOT / "assets" / "claimtrace-evidence-flow.svg"
 
 
 st.set_page_config(

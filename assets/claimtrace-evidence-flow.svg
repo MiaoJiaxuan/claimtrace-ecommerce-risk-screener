@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 310" fill="none">
+  <title>ClaimTrace evidence trail</title>
+  <desc>A document connects to case evidence and a human review prompt. This is not a live result.</desc>
+  <defs><linearGradient id="surface" x1="28" y1="20" x2="614" y2="290" gradientUnits="userSpaceOnUse"><stop stop-color="#F1F9F7"/><stop offset="1" stop-color="#DCEFEB"/></linearGradient></defs>
+  <rect x="12" y="12" width="616" height="286" rx="14" fill="url(#surface)"/>
+  <g stroke="#A6CFC7" stroke-width="1" opacity=".36"><path d="M40 64H600M40 122H600M40 180H600M40 238H600M90 36V274M205 36V274M320 36V274M435 36V274M550 36V274"/></g>
+  <path d="M162 151H260M368 151H469" stroke="#0B7770" stroke-width="2.5"/>
+  <path d="M246 144L253 151L246 158M455 144L462 151L455 158" stroke="#0B7770" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <g stroke="#063D3B" stroke-width="2.2">
+    <path d="M73 82H135L159 106V218H73V82Z" fill="#FBFDFC"/>
+    <path d="M135 82V106H159M91 126H140M91 148H131M91 172H140M91 192H122"/>
+    <rect x="86" y="137" width="53" height="21" rx="3" fill="#18B8A7" fill-opacity=".15" stroke="#0B7770"/>
+    <rect x="258" y="82" width="100" height="119" rx="6" fill="#D6EAE4"/>
+    <rect x="272" y="98" width="100" height="119" rx="6" fill="#FBFDFC"/>
+    <path d="M290 122H352M290 141H342M290 161H335"/>
+    <path d="M291 184H301V174M316 184H326V174" stroke="#0B7770" stroke-linecap="round"/>
+    <rect x="471" y="92" width="105" height="124" rx="8" fill="#FBFDFC"/>
+    <circle cx="523" cy="128" r="15"/>
+    <path d="M496 176C496 160 508 153 523 153C538 153 550 160 550 176M495 195H551" stroke-linecap="round"/>
+  </g>
+  <g fill="#0B7770"><circle cx="117" cy="251" r="4"/><circle cx="320" cy="251" r="4"/><circle cx="523" cy="251" r="4"/></g>
+</svg>
